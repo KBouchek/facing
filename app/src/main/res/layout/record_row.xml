@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/record_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:text="record_id"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/record_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:text="record_name"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/record_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/record_name"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-4dp"
+        android:layout_toEndOf="@+id/textView5"
+        android:text="record_barcode"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/record_emmployee_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/record_barcode"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="-2dp"
+        android:layout_toEndOf="@+id/textView6"
+        android:text="record_emmployee_id"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/record_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/record_emmployee_id"
+        android:layout_alignParentLeft="false"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="-49dp"
+        android:layout_toEndOf="@+id/textView7"
+        android:text="tag"
+        android:textColor="#343434"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/record_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/record_date_displayed"
+
+        android:layout_alignStart="@+id/record_date_displayed"
+
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="5dp"
+        android:text="record_date"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/record_date_displayed"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="4dp"
+        android:text="UTC time"
+        android:textSize="8sp" />
+
+    <TextView
+        android:id="@+id/record_date_displayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/record_barcode"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="5dp"
+        android:text="record_date_displayed"
+        android:textColor="#343434"
+        android:textSize="14dp" />
+
+    <ProgressBar
+        android:id="@+id/record_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/record_id"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:text="Code"
+        android:textSize="8sp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:text="Empl id"
+        android:textSize="8sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-43dp"
+        android:layout_toEndOf="@+id/record_id"
+        android:text="Tag id"
+        android:textSize="8sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/record_date_displayed"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toStartOf="@+id/record_date_displayed"
+        android:text="Phone time"
+        android:textSize="8sp" />
+</RelativeLayout>

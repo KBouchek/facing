@@ -1,0 +1,8 @@
+/*
+ * Ce fichier fait part de l'application FacingTahiti.
+ * Copyright (c) 2020 Fenuapps contact@fenuapps.com
+ * Auteur: Karim Bouchekoura.
+ * licence agpl v3
+ * contact: contact@invitu.com
+ *
+ */
