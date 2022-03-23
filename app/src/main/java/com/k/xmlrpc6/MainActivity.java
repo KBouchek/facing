@@ -42,6 +42,7 @@ import android.widget.Toast;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -374,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
             //Log.d(TAG, "BackFromScan sans changement" + resultCode + " data " + data);
             libere();
         }
-        if(resultCode == 1){
+        if(resultCode == 1) {
             /* retour avec changements */
             if(!database_access) {
                 Toast.makeText(this,"Ce SCAN ne sera pas pris en compte", Toast.LENGTH_SHORT).show();
@@ -583,11 +584,11 @@ public class MainActivity extends AppCompatActivity {
 
         XMLRPCCallback listener2 = new XMLRPCCallback() {
             public void onResponse(long id, Object result) {
-                //Log.d("KKKxx","listener d'insertion reçoit " +result.toString() );
+                Log.d("KKKxx","listener d'insertion reçoit " +result.toString() );
                 // final String str = "sendLastRecord: " +result.toString();
                 if(Integer.valueOf(result.toString()) > 0) {
                     //Log.d("KKKxx","listener d'insertion result.toString()) > 0 " +result.toString() );
-                    //Log.d("KKKxx","listener sendLastRecord supprime le dernier record");
+                    Log.d("KKKxx","listener2 sendLastRecord supprime le dernier record");
                     //RecordDbHandler dbx = RecordDbHandler.getInstance(getApplicationContext());
                     int result_db = RecordManager.getInstance().deleteLastRecord();
                     //Log.d("KKKxx","DELETE said = "+result_db);
@@ -609,7 +610,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             public void onError(long id, XMLRPCException error) {
-                //Log.d("KKKxx","SendDatas error : "+error.getMessage() );
+                Log.d("KKKxx","SendDatas error : "+error.getMessage() );
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -620,7 +621,7 @@ public class MainActivity extends AppCompatActivity {
             }
             public void onServerError(long id, XMLRPCServerException error) {
                 // Handling an error response from the server
-                //Log.d("KKKxx","SendDatas onServerError : "+error.getMessage());
+                Log.d("KKKxx","SendDatas onServerError : "+error.getMessage());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -640,9 +641,36 @@ public class MainActivity extends AppCompatActivity {
 
         XMLRPCClient models;
         try {
-            models = new XMLRPCClient(new URL(String.format("%s/xmlrpc/2/object", url)));
-            long id = models.callAsync(listener2, "execute_kw",db_name, uid_pref, password_pref,"facing_profile.pointage", "create",  asList(new HashMap() {{ put("name", record.getName());put("employee_id", employeeid);put("tag_id", tagid);put("date", record.getDate());}}));
+            /*String jour = record.getDate().substring(0,2);
+            String mois = record.getDate().substring(3,2);
+            String annee = record.getDate().substring(6,4);
+            String reste = record.getDate().substring(11,8);
+            final String newdate = annee+"/"+mois+"/"+jour+" "+reste;*/
+            final String OLD_FORMAT = "dd/MM/yyyy HH:mm:ss";
+            final String NEW_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+            String oldDateString = record.getDate();
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+            Date d = null;
+            try {
+                d = sdf.parse(oldDateString);
+                sdf.applyPattern(NEW_FORMAT);
+                final String  newDateString = sdf.format(d);
+                final String  autretag = sdf.format(d);
+
+                models = new XMLRPCClient(new URL(String.format("%s/xmlrpc/2/object", url)));
+                //long id = models.callAsync(listener2, "execute_kw",db_name, uid_pref, password_pref,"facing_profile.pointage", "create",  asList(new HashMap() {{ put("name", record.getName());put("employee_id", employeeid);put("tag_id", tagid);put("date", record.getDate());}}));
+                long id = models.callAsync(listener2, "execute_kw",db_name, uid_pref, password_pref,"facing_profile.pointage", "create",  asList(new HashMap() {{ put("name", record.getName());put("employee_id", employeeid);put("tag_id", tagid);put("date", newDateString);}}));
+                Log.d("KKK", "callAsync  envoyé");
+            } catch (ParseException e) {
+                Log.d("KKK", "ParseException pas envoyé");
+                e.printStackTrace();
+            }
+
         } catch (MalformedURLException e) {
+            Log.d("KKK", "MalformedURLException pas envoyé");
             e.printStackTrace();
         }
 
@@ -650,7 +678,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void abandonneEnvoi() {
-        //Log.d("KKKxx","abandonneEnvoi : ");
+        Log.d("KKKxx","abandonneEnvoi : ");
         database_access = true;
         timer_should_run = true;
         barcode_edittext.setText("");
@@ -695,13 +723,13 @@ public class MainActivity extends AppCompatActivity {
 
         XMLRPCCallback listener = new XMLRPCCallback() {
             public void onResponse(long id, Object result) {
-                //Log.d("KKKxx", "found Object  " +result.toString());
+                Log.d("KKKxx", "found Object  " +result.toString());
 
                 Object[] x = (Object[]) result;
                 if(x.length > 0) {
                     Log.d("KKKxx", "found code: " + x[0].toString());
                     if (Integer.valueOf(x[0].toString()) > 0) {
-                        //Log.d("KKKxx", "updating last record (id="+record.getId()+") with tag_id = " + x[0].toString());
+                        Log.d("KKKxx", "updating last record (id="+record.getId()+") with tag_id = " + x[0].toString());
                         final String fff = x[0].toString();
                         runOnUiThread(new Runnable() {
                             @Override
@@ -728,7 +756,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(long id, XMLRPCException error) {
-                //Log.d("KKKxx","SendDatas error : "+error.getMessage() );
+                Log.d("KKKxx","SendDatas error : "+error.getMessage() );
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -739,7 +767,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onServerError(long id, XMLRPCServerException error) {
-                //Log.d("KKKxx","SendDatas onServerError : "+error.getMessage());
+                Log.d("KKKxx","SendDatas onServerError : "+error.getMessage());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

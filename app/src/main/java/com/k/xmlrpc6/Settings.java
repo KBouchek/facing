@@ -123,7 +123,7 @@ public class Settings extends AppCompatActivity {
 
         XMLRPCCallback listener = new XMLRPCCallback() {
             public void onResponse(long id, Object result) {
-                //Log.d("KKKxx",String.valueOf(id) + " " +result.toString() );
+                Log.d("KKKxx",String.valueOf(id) + " " +result.toString() );
                 //Log.d("KKKxx","onResponse ok : "+result.toString() );
                 int i = 0;
                 if(result != null && result.toString() != "false"){
@@ -154,7 +154,8 @@ public class Settings extends AppCompatActivity {
                 }
             }
             public void onError(long id, XMLRPCException error) {
-                //Log.d("KKKxx",error.getMessage() );
+                Log.d("KKKxx",error.getMessage() );
+                //Log.d("KKKxx",String.valueOf(id) + " " +result.toString() );
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -165,7 +166,7 @@ public class Settings extends AppCompatActivity {
             }
             public void onServerError(long id, XMLRPCServerException error) {
                 // Handling an error response from the server
-                //Log.d("KKKxx",error.getMessage() );
+                Log.d("KKKxx",error.getMessage() );
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

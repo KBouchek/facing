@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "xmlrpc6";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     private static MySQLite sInstance;
 
@@ -32,7 +32,7 @@ public class MySQLite extends SQLiteOpenHelper {
         // Mise à jour de la base de données
         // méthode appelée sur incrémentation de DATABASE_VERSION
         // on peut faire ce qu'on veut ici, comme recréer la base :
-        onCreate(sqLiteDatabase);
+        //onCreate(sqLiteDatabase);
     }
 
 } // class MySQLite
